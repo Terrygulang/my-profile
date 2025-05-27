@@ -4,250 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>My Profile - TERRY SU</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: 'Arial', 'Microsoft YaHei', sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            min-height: 100vh;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-
-        .profile-card {
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: 20px;
-            padding: 40px;
-            margin-bottom: 30px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
-            transform: translateY(0);
-            transition: all 0.3s ease;
-        }
-
-        .profile-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.15);
-        }
-
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-
-        .avatar {
-            width: 150px;
-            height: 150px;
-            border-radius: 50%;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            margin: 0 auto 20px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 60px;
-            color: white;
-            animation: float 3s ease-in-out infinite;
-            overflow: hidden;
-            border: 4px solid rgba(255, 255, 255, 0.8);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-        }
-        .avatar img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            border-radius: 50%;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-        }
-
-        .name {
-            font-size: 2.5em;
-            font-weight: bold;
-            margin-bottom: 10px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .title {
-            font-size: 1.2em;
-            color: #666;
-            margin-bottom: 20px;
-        }
-
-        .contact-info {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            flex-wrap: wrap;
-            margin-bottom: 30px;
-        }
-
-        .contact-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: #555;
-            font-size: 0.95em;
-        }
-
-        .section {
-            margin-bottom: 40px;
-        }
-
-        .section-title {
-            font-size: 1.8em;
-            font-weight: bold;
-            margin-bottom: 20px;
-            text-align: center;
-            position: relative;
-            color: #333;
-        }
-
-        .section-title::after {
-            content: '';
-            width: 60px;
-            height: 3px;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            position: absolute;
-            bottom: -8px;
-            left: 50%;
-            transform: translateX(-50%);
-            border-radius: 2px;
-        }
-
-        .intro-text {
-            font-size: 1.1em;
-            line-height: 1.8;
-            text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
-            color: #555;
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 30px;
-            margin-top: 30px;
-        }
-
-        .skill-category {
-            background: white;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-            transition: all 0.3s ease;
-        }
-
-        .skill-category:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.12);
-        }
-
-        .skill-category h3 {
-            font-size: 1.3em;
-            margin-bottom: 15px;
-            color: #333;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .skill-list {
-            list-style: none;
-        }
-
-        .skill-item {
-            margin-bottom: 12px;
-            position: relative;
-            padding-left: 20px;
-        }
-
-        .skill-item::before {
-            content: '▶';
-            position: absolute;
-            left: 0;
-            color: #667eea;
-            font-size: 0.8em;
-        }
-
-        .skill-level {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            margin-bottom: 8px;
-        }
-
-        .progress-bar {
-            width: 100%;
-            height: 6px;
-            background: #f0f0f0;
-            border-radius: 3px;
-            overflow: hidden;
-            margin-top: 5px;
-        }
-
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(45deg, #667eea, #764ba2);
-            border-radius: 3px;
-            transition: width 1s ease-in-out;
-            animation: fillProgress 2s ease-in-out;
-        }
-
-        @keyframes fillProgress {
-            from { width: 0; }
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 50px;
-            padding: 30px;
-            background: rgba(255, 255, 255, 0.9);
-            border-radius: 15px;
-            color: #666;
-        }
-
-        @media (max-width: 768px) {
-            .container {
-                padding: 15px;
-            }
-            
-            .profile-card {
-                padding: 25px;
-            }
-            
-            .contact-info {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .skills-grid {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-            
-            .name {
-                font-size: 2em;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="styles/main.css">
 </head>
 <body>
     <div class="container">
@@ -271,6 +28,47 @@
                     <div class="contact-item">
                         <span>📍</span>
                         <span>Sydney NSW</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section">
+                <h2 class="section-title">🚀 Featured Projects</h2>
+                <div class="skills-grid">
+                    <div class="skill-category project-card">
+                        <h3>
+                            <span>🌐</span>
+                            Social Network Analysis
+                        </h3>
+                        <p style="margin: 15px 0; color: #666; line-height: 1.6;">
+                            Built a comprehensive social network analysis system to identify key influencers and community structures within large-scale social media data.
+                        </p>
+                        <div style="margin: 15px 0;">
+                            <span style="background: #e3f2fd; color: #1976d2; padding: 4px 8px; border-radius: 12px; font-size: 0.8em; margin-right: 8px;">Python</span>
+                            <span style="background: #e8f5e8; color: #2e7d32; padding: 4px 8px; border-radius: 12px; font-size: 0.8em; margin-right: 8px;">NetworkX</span>
+                            <span style="background: #fff3e0; color: #f57c00; padding: 4px 8px; border-radius: 12px; font-size: 0.8em;">AIML</span>
+                        </div>
+                        <a href="./projects/project1.html" style="display: inline-block; background: linear-gradient(45deg, #667eea, #764ba2); color: white; padding: 10px 20px; border-radius: 20px; text-decoration: none; font-weight: bold; margin-top: 10px; transition: transform 0.3s ease;">
+                            View Project →
+                        </a>
+                    </div>
+
+                    <div class="skill-category project-card">
+                        <h3>
+                            <span>📊</span>
+                            Multi-Data Integration & Automation
+                        </h3>
+                        <p style="margin: 15px 0; color: #666; line-height: 1.6;">
+                            Developed an automated reporting system that integrates multiple data sources to generate comprehensive financial reports with real-time updates.
+                        </p>
+                        <div style="margin: 15px 0;">
+                            <span style="background: #e3f2fd; color: #1976d2; padding: 4px 8px; border-radius: 12px; font-size: 0.8em; margin-right: 8px;">Python</span>
+                            <span style="background: #f3e5f5; color: #7b1fa2; padding: 4px 8px; border-radius: 12px; font-size: 0.8em; margin-right: 8px;">SQL</span>
+                            <span style="background: #e0f2f1; color: #00695c; padding: 4px 8px; border-radius: 12px; font-size: 0.8em;">Power BI</span>
+                        </div>
+                        <a href="./projects/project2.html" style="display: inline-block; background: linear-gradient(45deg, #667eea, #764ba2); color: white; padding: 10px 20px; border-radius: 20px; text-decoration: none; font-weight: bold; margin-top: 10px; transition: transform 0.3s ease;">
+                            View Project →
+                        </a>
                     </div>
                 </div>
             </div>
@@ -444,51 +242,6 @@
         </div>
     </div>
 
-    <script>
-        // 添加一些交互效果
-        document.addEventListener('DOMContentLoaded', function() {
-            // 监听滚动，为进度条添加动画
-            const observerOptions = {
-                threshold: 0.5,
-                rootMargin: '0px 0px -100px 0px'
-            };
-
-            const observer = new IntersectionObserver(function(entries) {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const progressBars = entry.target.querySelectorAll('.progress-fill');
-                        progressBars.forEach(bar => {
-                            bar.style.animation = 'fillProgress 2s ease-in-out';
-                        });
-                    }
-                });
-            }, observerOptions);
-
-            // 观察所有技能卡片
-            document.querySelectorAll('.skill-category').forEach(card => {
-                observer.observe(card);
-            });
-
-            // 添加头像点击效果
-            const avatar = document.querySelector('.avatar');
-            avatar.addEventListener('click', function() {
-                this.style.transform = 'scale(1.1) rotate(360deg)';
-                setTimeout(() => {
-                    this.style.transform = 'scale(1) rotate(0deg)';
-                }, 600);
-            });
-
-            // 添加技能卡片悬停效果
-            document.querySelectorAll('.skill-category').forEach(card => {
-                card.addEventListener('mouseenter', function() {
-                    this.style.borderLeft = '4px solid #667eea';
-                });
-                
-                card.addEventListener('mouseleave', function() {
-                    this.style.borderLeft = 'none';
-                });
-            });
-        });
-    </script>
+    <script src="scripts/main.js"></script>
 </body>
 </html>

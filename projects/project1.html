@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Network Analysis Project</title>
+    <link rel="stylesheet" href="../styles/project.css">
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <div class="nav">
+                <a href="../index.html" class="back-btn">← Back to Portfolio</a>
+                <div class="nav-links">
+                    <a href="project2.html" class="back-btn" style="background: linear-gradient(45deg, #f093fb, #f5576c);">Next Project →</a>
+                </div>
+            </div>
+            <h1 class="project-title">Social Network Analysis</h1>
+            <p class="project-subtitle">Building connections through data-driven insights</p>
+        </div>
+
+        <div class="content-card">
+            <h2 class="section-title">📊 Project Overview</h2>
+            <div class="project-overview">
+                <div class="overview-item">
+                    <h4>🎯 Objective</h4>
+                    <p>Analyze social network patterns to identify key influencers and community structures within large-scale social media data.</p>
+                </div>
+                <div class="overview-item">
+                    <h4>📈 Impact</h4>
+                    <p>Improved marketing campaign targeting by 40% and identified 15+ key opinion leaders for brand partnerships.</p>
+                </div>
+                <div class="overview-item">
+                    <h4>⏱️ Timeline</h4>
+                    <p>6 months development and testing phase with ongoing monitoring and optimization.</p>
+                </div>
+                <div class="overview-item">
+                    <h4>👥 Team Size</h4>
+                    <p>Cross-functional team of 4: Data analysts, developers, and marketing specialists.</p>
+                </div>
+            </div>
+
+            <h3 class="section-title">🛠️ Technology Stack</h3>
+            <div class="tech-stack">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">NetworkX</span>
+                <span class="tech-tag">Pandas</span>
+                <span class="tech-tag">Matplotlib</span>
+                <span class="tech-tag">Seaborn</span>
+                <span class="tech-tag">Gephi</span>
+                <span class="tech-tag">Neo4j</span>
+                <span class="tech-tag">D3.js</span>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2 class="section-title">💻 Key Code Implementation</h2>
+            
+            <div class="code-section">
+                <div class="code-header">
+                    <span class="code-title">Network Analysis Core Algorithm</span>
+                    <button class="copy-btn" onclick="copyCode('code1')">Copy Code</button>
+                </div>
+                <div class="code-block" id="code1">
+<span class="keyword">import</span> networkx <span class="keyword">as</span> nx
+<span class="keyword">import</span> pandas <span class="keyword">as</span> pd
+<span class="keyword">from</span> collections <span class="keyword">import</span> Counter
+
+<span class="keyword">def</span> <span class="function">analyze_social_network</span>(edge_data, user_data):
+    <span class="comment"># Create network graph from edge data</span>
+    G = nx.from_pandas_edgelist(edge_data, <span class="string">'source'</span>, <span class="string">'target'</span>)
+    
+    <span class="comment"># Calculate centrality measures</span>
+    centrality_metrics = {
+        <span class="string">'betweenness'</span>: nx.betweenness_centrality(G),
+        <span class="string">'closeness'</span>: nx.closeness_centrality(G),
+        <span class="string">'eigenvector'</span>: nx.eigenvector_centrality(G),
+        <span class="string">'pagerank'</span>: nx.pagerank(G)
+    }
+    
+    <span class="comment"># Identify communities using Louvain algorithm</span>
+    communities = nx.community.louvain_communities(G)
+    
+    <span class="comment"># Generate influence scores</span>
+    influence_scores = {}
+    <span class="keyword">for</span> node <span class="keyword">in</span> G.nodes():
+        score = (
+            centrality_metrics[<span class="string">'betweenness'</span>][node] * <span class="number">0.3</span> +
+            centrality_metrics[<span class="string">'closeness'</span>][node] * <span class="number">0.2</span> +
+            centrality_metrics[<span class="string">'eigenvector'</span>][node] * <span class="number">0.3</span> +
+            centrality_metrics[<span class="string">'pagerank'</span>][node] * <span class="number">0.2</span>
+        )
+        influence_scores[node] = score
+    
+    <span class="keyword">return</span> {
+        <span class="string">'graph'</span>: G,
+        <span class="string">'centrality'</span>: centrality_metrics,
+        <span class="string">'communities'</span>: communities,
+        <span class="string">'influence_scores'</span>: influence_scores
+    }
+                </div>
+            </div>
+
+            <div class="code-section">
+                <div class="code-header">
+                    <span class="code-title">Community Detection & Visualization</span>
+                    <button class="copy-btn" onclick="copyCode('code2')">Copy Code</button>
+                </div>
+                <div class="code-block" id="code2">
+<span class="keyword">def</span> <span class="function">visualize_communities</span>(G, communities, influence_scores):
+    <span class="keyword">import</span> matplotlib.pyplot <span class="keyword">as</span> plt
+    <span class="keyword">import</span> numpy <span class="keyword">as</span> np
+    
+    <span class="comment"># Create color map for communities</span>
+    colors = plt.cm.Set3(np.linspace(<span class="number">0</span>, <span class="number">1</span>, len(communities)))
+    node_colors = {}
+    
+    <span class="keyword">for</span> i, community <span class="keyword">in</span> enumerate(communities):
+        <span class="keyword">for</span> node <span class="keyword">in</span> community:
+            node_colors[node] = colors[i]
+    
+    <span class="comment"># Set node sizes based on influence scores</span>
+    node_sizes = [influence_scores.get(node, <span class="number">0.1</span>) * <span class="number">1000</span> <span class="keyword">for</span> node <span class="keyword">in</span> G.nodes()]
+    node_color_list = [node_colors.get(node, <span class="string">'gray'</span>) <span class="keyword">for</span> node <span class="keyword">in</span> G.nodes()]
+    
+    <span class="comment"># Create layout and plot</span>
+    pos = nx.spring_layout(G, k=<span class="number">3</span>, iterations=<span class="number">50</span>)
+    
+    plt.figure(figsize=(<span class="number">15</span>, <span class="number">10</span>))
+    nx.draw_networkx_nodes(G, pos, 
+                          node_color=node_color_list,
+                          node_size=node_sizes,
+                          alpha=<span class="number">0.8</span>)
+    nx.draw_networkx_edges(G, pos, alpha=<span class="number">0.3</span>, width=<span class="number">0.5</span>)
+    
+    <span class="comment"># Add labels for top influencers</span>
+    top_influencers = sorted(influence_scores.items(), 
+                           key=<span class="keyword">lambda</span> x: x[<span class="number">1</span>], reverse=<span class="keyword">True</span>)[:<span class="number">10</span>]
+    top_nodes = {node: node <span class="keyword">for</span> node, _ <span class="keyword">in</span> top_influencers}
+    nx.draw_networkx_labels(G, pos, top_nodes, font_size=<span class="number">8</span>)
+    
+    plt.title(<span class="string">'Social Network Communities & Influence Distribution'</span>, 
+              fontsize=<span class="number">16</span>, fontweight=<span class="string">'bold'</span>)
+    plt.axis(<span class="string">'off'</span>)
+    plt.tight_layout()
+    plt.show()
+                </div>
+            </div>
+        </div>
+
+        <div class="content-card">
+            <h2 class="section-title">📈 Results & Impact</h2>
+            <div class="results-section">
+                <div class="result-item">
+                    <div class="result-icon">🎯</div>
+                    <div class="result-text">
+                        <div class="result-number">40%</div>
+                        <p>Improvement in marketing campaign targeting accuracy</p>
+                    </div>
+                </div>
+                <div class="result-item">
+                    <div class="result-icon">👥</div>
+                    <div class="result-text">
+                        <div class="result-number">15+</div>
+                        <p>Key opinion leaders identified for brand partnerships</p>
+                    </div>
+                </div>
+                <div class="result-item">
+                    <div class="result-icon">📊</div>
+                    <div class="result-text">
+                        <div class="result-number">500K+</div>
+                        <p>Social media profiles analyzed and categorized</p>
+                    </div>
+                </div>
+                <div class="result-item">
+                    <div class="result-icon">⚡</div>
+                    <div class="result-text">
+                        <div class="result-number">85%</div>
+                        <p>Reduction in manual community detection time</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="demo-section">
+            <h2>🚀 Project Demo</h2>
+            <p>Experience the interactive network visualization and explore the insights</p>
+            <a href="#" class="demo-btn">Live Demo</a>
+            <a href="#" class="demo-btn">GitHub Repository</a>
+        </div>
+    </div>
+
+    <script src="../scripts/project.js"></script>
+</body>
+</html>
